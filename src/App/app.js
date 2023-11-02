@@ -1,7 +1,6 @@
 console.clear()
 
-import { Loader } from '/src/App/UI/Components/Loader.js'
-import { Engine } from '/src/Lib/Engine.js'
+import { Loader } from '/App/UI/Components/Loader.js'
 
 Loader.load().then(() => {
     new Vue({
@@ -45,10 +44,6 @@ Loader.load().then(() => {
               })
         },
         methods: {
-          clickOnMessage() {
-            const engine = new Engine('!oot dohtem a morf skrow tI')
-            this.message = engine.getInvertedMessage()
-          }
         },
     });
 })
