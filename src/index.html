@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="/src/">
+    <title>BGA Games</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="App/Styles/app.css">
+</head>
+<body class="bg-[url('https://x.boardgamearena.net/data/themereleases/231025-1001/img/mainsite/games/default_banner.jpg')] ">
+    <div id="app" v-cloak class="container mx-auto bg-repeat min-h-screen">
+        <div class="flex gap-6 m-3 rounded shadow-sm p-4 bg-white p-4 text-sm font-sans">
+            <div>
+                Jogado
+                <select v-model="played" class="block w-32 mt-1 px-4 py-3 text-base text-gray-900 rounded bg-gray-50 focus:ring-blue-500 focus:border-blue-500">
+                    <option value="-1">-</option>
+                    <option value="0">Não</option>
+                    <option value="1">Sim</option>
+                </select>
+            </div>
+            <div>
+                Aprendido
+                <select v-model="learned" class="block w-32 mt-1 px-4 py-3 text-base text-gray-900 rounded bg-gray-50 focus:ring-blue-500 focus:border-blue-500">
+                    <option value="-1">-</option>
+                    <option value="0">Não</option>
+                    <option value="1">Sim</option>
+                </select>
+            </div>
+            <div>
+                Jogadores
+                <div>
+                    <select v-model="maxPlayers" class="w-32 mt-1 px-4 py-3 text-base text-gray-900 rounded bg-gray-50 focus:ring-blue-500 focus:border-blue-500">
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="mt-4 flex gap-2 justify-center flex-wrap">
+            <game-card
+                v-for="game in filteredGames"
+                :min-players="game.minPlayers"
+                :max-players="game.maxPlayers"
+                :complexity="game.complexity"
+                :rate="game.rate"
+                :time="game.time"
+                :learned="game.learned"
+                :played="game.played"
+                :name="game.name"
+                :title="game.title"
+                :key="game.name"
+            ></game-card>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="App/app.js" type="module"></script>
+</body>
+</html>
