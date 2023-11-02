@@ -17,7 +17,7 @@ export class Loader
         return Promise.all(this.files.map(file => {
             return import(`${path}${file}/index.js`).then(module => {
                 const component = module.default
-                return fetch(`${path}/${file}/template.html`).then(response => response.text()).then(text => {
+                return fetch(`${path}${file}/template.html`).then(response => response.text()).then(text => {
                     const template = text.match(/.*?script>(.*)/smi)[1]
                     Vue.component(file, {
                         template,
