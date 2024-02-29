@@ -16,6 +16,7 @@ Loader.load().then(() => {
         },
         computed: {
           filteredGames() {
+            console.log({maxPlayers: this.maxPlayers})
             return this.games.filter(game => {
               let isValid = (
                 !this.maxPlayers ||
