@@ -18,8 +18,11 @@ Loader.load().then(() => {
           filteredGames() {
             return this.games.filter(game => {
               let isValid = (
-                game.minPlayers <= this.maxPlayers &&
-                game.maxPlayers >= this.maxPlayers
+                this.maxPlayers === 0 ||
+                (
+                  game.minPlayers <= this.maxPlayers &&
+                  game.maxPlayers >= this.maxPlayers
+                )
               )
 
               if (this.played > -1) {
