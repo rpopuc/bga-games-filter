@@ -38,6 +38,10 @@ export default
                 type: String,
                 default: '',
             },
+            link: {
+                type: String,
+                default: '',
+            },
         },
         methods: {
             getBackground() {
