@@ -36,7 +36,7 @@ Loader.load().then(() => {
               }
 
               if (this.rating > -1) {
-                isValid = isValid && (game.rate >= this.rating)
+                isValid = isValid && (game.rate == this.rating)
               }
 
               if (this.filter) {
