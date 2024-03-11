@@ -11,12 +11,12 @@ Loader.load().then(() => {
                 maxPlayers: 6,
                 learned: 1,
                 played: 1,
-                games: []
+                games: [],
+                filter: ''
             };
         },
         computed: {
           filteredGames() {
-            console.log({maxPlayers: this.maxPlayers})
             return this.games.filter(game => {
               let isValid = (
                 !this.maxPlayers ||
