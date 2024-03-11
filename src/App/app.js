@@ -53,11 +53,6 @@ Loader.load().then(() => {
         },
 
         watch: {
-          filter() {
-            this.$nextTick(() => {
-              this.$refs.games.scrollTop = 0
-            })
-          }
         },
 
         methods: {
