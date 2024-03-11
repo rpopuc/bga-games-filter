@@ -34,6 +34,10 @@ Loader.load().then(() => {
                 isValid = isValid && (this.learned == 0 ? !game.learned : game.learned)
               }
 
+              if (this.filter) {
+                isValid = isValid && game.name.toLowerCase().includes(this.filter.toLowerCase())
+              }
+
               return isValid
             }).sort((a, b) => {
               return a.name > b.name ? 1 : -1
@@ -47,6 +51,15 @@ Loader.load().then(() => {
                 this.games = games
               })
         },
+
+        watch: {
+          filter() {
+            this.$nextTick(() => {
+              this.$refs.games.scrollTop = 0
+            })
+          }
+        },
+
         methods: {
         },
     });
