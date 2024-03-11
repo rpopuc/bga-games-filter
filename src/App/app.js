@@ -12,6 +12,7 @@ Loader.load().then(() => {
                 learned: 1,
                 played: 1,
                 games: [],
+                rating: 0,
                 filter: ''
             };
         },
@@ -32,6 +33,10 @@ Loader.load().then(() => {
 
               if (this.learned > -1) {
                 isValid = isValid && (this.learned == 0 ? !game.learned : game.learned)
+              }
+
+              if (this.rating > -1) {
+                isValid = isValid && (game.rate >= this.rating)
               }
 
               if (this.filter) {
