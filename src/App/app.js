@@ -40,7 +40,10 @@ Loader.load().then(() => {
               }
 
               if (this.filter) {
-                isValid = isValid && game.name.toLowerCase().includes(this.filter.toLowerCase())
+                isValid = isValid && (
+                  game.name.toLowerCase().includes(this.filter.toLowerCase()) ||
+                  game.title.toLowerCase().includes(this.filter.toLowerCase())
+                )
               }
 
               return isValid
