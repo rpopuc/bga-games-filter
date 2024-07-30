@@ -9,6 +9,7 @@ export class Loader
         'IconPlayed',
         'IconLearned',
         'Rating',
+        'Selector',
         'GameCard',
     ]
 
