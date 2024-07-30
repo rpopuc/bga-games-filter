@@ -1,5 +1,5 @@
 <a :href="link" target="_blank">
-    <div class="rounded w-[270px] relative p-2 border-gray-400 bg-neutral-white outline outline-1 -outline-offset-1 outline-neutral-gray border-neutral-gray flex flex-col items-center bg-cover saturate-50 hover:saturate-0 group cursor-pointer hover:-translate-y-0.5 hover:translate-x-0.5 transition-transform " :class="getBackground()">
+    <div class="rounded w-[270px] relative p-2 bg-neutral-white outline outline-1 -outline-offset-1 outline-neutral-gray border-neutral-gray flex flex-col items-center bg-cover saturate-50 hover:saturate-0 group cursor-pointer hover:-translate-y-0.5 hover:translate-x-0.5 transition-transform " :class="getBackground()">
         <div class="absolute top-0 left-0 w-7 h-7 rounded-br-full border-b border-r border-inherit bg-inherit"></div>
         <div class="absolute top-0 right-0 w-7 h-7 rounded-bl-full border-b border-l border-inherit bg-inherit"></div>
         <div class="absolute bottom-0 left-0 w-7 h-7 rounded-tr-full border-t border-r border-inherit bg-inherit"></div>
@@ -9,19 +9,19 @@
         </div>
         <div class="relative bottom-3 flex gap-4 items-center justify-center">
             <div class="flex flex-col items-center gap-1">
-                <div class=" border border-black rounded-full p-4 size-4 flex items-center justify-center bg-[#F1EEE5]">
+                <div class=" border border-neutral-gray rounded-full p-4 size-4 flex items-center justify-center bg-[#F1EEE5]">
                     {{maxPlayers}}
                 </div>
                 <icon-user class="h-5"></icon-user>
             </div>
             <div class="flex flex-col items-center gap-1">
-                <div class="border border-black rounded-full p-4 size-4 flex items-center justify-center bg-[#F1EEE5]">
+                <div class="border border-neutral-gray rounded-full p-4 size-4 flex items-center justify-center bg-[#F1EEE5]">
                     {{time}}
                 </div>
                 <icon-clock class="h-5"></icon-clock>
             </div>
             <div class="flex flex-col items-center gap-1">
-                <div class="border border-black rounded-full p-4 size-4 flex items-center justify-center bg-[#F1EEE5]">
+                <div class="border border-neutral-gray rounded-full p-4 size-4 flex items-center justify-center bg-[#F1EEE5]">
                     {{complexity}}
                 </div>
                 <icon-complexity class="h-5"></icon-complexity>
