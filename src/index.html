@@ -7,17 +7,18 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="/App/Styles/app.css">
 </head>
-<body class="bg-[url('https://x.boardgamearena.net/data/themereleases/231025-1001/img/mainsite/games/default_banner.jpg')] ">
-    <div id="app" v-cloak class="container mx-auto bg-repeat min-h-screen mb-8">
-        <div class="flex gap-6 m-3 rounded shadow-sm p-4 bg-white p-4 text-sm font-sans">
-            <div>
-                Jogado
-                <select v-model="played" class="h-12 block w-32 mt-1 px-4 py-3 text-base text-gray-900 rounded bg-gray-50 focus:ring-blue-500 focus:border-blue-500">
-                    <option value="-1">-</option>
-                    <option value="0">Não</option>
-                    <option value="1">Sim</option>
-                </select>
-            </div>
+<body class="bg-[#F1EEE5]">
+    <div id="app">
+        <div class="border-b border-black flex items-center justify-center">
+            <div class="flex items-center justify-centers gap-6 rounded shadow-sm p-4 p-4 text-sm font-sans">
+                <div>
+                    Jogado
+                    <select v-model="played" class="h-12 block w-32 mt-1 px-4 py-3 text-base text-gray-900 rounded bg-gray-50 focus:ring-blue-500 focus:border-blue-500">
+                        <option value="-1">-</option>
+                        <option value="0">Não</option>
+                        <option value="1">Sim</option>
+                    </select>
+                </div>
             <div>
                 Aprendido
                 <select v-model="learned" class="block h-12 w-32 mt-1 px-4 py-3 text-base text-gray-900 rounded bg-gray-50 focus:ring-blue-500 focus:border-blue-500">
@@ -60,6 +61,7 @@
                 <div class="flex items-center justify-center h-12 w-72 mt-1 text-base text-gray-900 p-2 rounded bg-gray-50 focus:ring-blue-500 focus:border-blue-500">
                     <input type="text" v-model="filter" class="border-0 h-full w-full bg-transparent focus:outline-none">
                 </div>
+            </div>
             </div>
         </div>
         <div class="mt-4 flex gap-2 justify-center flex-wrap">

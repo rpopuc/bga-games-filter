@@ -1,6 +1,6 @@
 console.clear()
 
-import { Loader } from '/App/UI/Components/Loader.js'
+import { Loader } from '/src/App/UI/Components/Loader.js'
 
 Loader.load().then(() => {
     new Vue({
