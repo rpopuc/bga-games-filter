@@ -45,7 +45,7 @@ export default
         },
         methods: {
             getBackground() {
-                return `hover:bg-[url('https://x.boardgamearena.net/data/gamemedia/${this.name}/banner/default_500.jpg?h=1651658186')]`;
+                return `bg-[url('https://x.boardgamearena.net/data/gamemedia/${this.name}/banner/default_500.jpg?h=1651658186')]`;
             }
         },
         mounted() {
