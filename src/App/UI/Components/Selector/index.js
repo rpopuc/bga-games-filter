@@ -1,58 +1,50 @@
 export default
 {
     definition: {
-        props: {
-            minPlayers: {
-                type: Number,
-                default: 1,
-            },
-            maxPlayers: {
-                type: Number,
-                default: 1,
-            },
-            time: {
-                type: Number,
-                default: 0,
-            },
-            complexity: {
-                type: Number,
-                default: 1,
-            },
-            learned: {
-                type: Boolean,
-                default: false,
-            },
-            played: {
-                type: Boolean,
-                default: false,
-            },
-            rate: {
-                type: Number,
-                default: 1,
-            },
-            name: {
-                type: String,
-                default: '',
-            },
-            title: {
-                type: String,
-                default: '',
-            },
-            link: {
-                type: String,
-                default: '',
-            },
-        },
-        methods: {
-            getName() {
-                return this.name;
-            },
-
-            getBackground() {
-                return `bg-[url('https://x.boardgamearena.net/data/gamemedia/${this.name}/banner/default_500.jpg?h=1651658186')]`;
+        data() {
+            return {
+                internalShowList: false,
+                internalSelected: this.value,
             }
         },
-        mounted() {
+
+        props: {
+            options: {
+                type: Array,
+            },
+            value: {
+                type: Number,
+                default: 1,
+            }
+        },
+        methods: {
+            toggleList() {
+                this.internalShowList = !this.internalShowList;
+            },
+
+            select(option) {
+                this.internalSelected = option.id;
+                this.toggleList();
+                this.$emit('input', this.internalSelected);
+            }
+        },
+        watch: {
+            value(newValue) {
+                this.internalSelected = newValue;
+            }
+        },
+        computed: {
+            showList() {
+                return this.internalShowList;
+            },
+
+            selected() {
+                return this.internalSelected;
+            },
+
+            selectedOption() {
+                return this.options.find(option => option.id === this.internalSelected);
+            }
         }
     },
 }

@@ -13,7 +13,7 @@ Loader.load().then(() => {
                 played: 1,
                 games: [],
                 rating: -1,
-                filter: ''
+                filter: '',
             };
         },
         computed: {

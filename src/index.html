@@ -11,80 +11,49 @@
     <div id="app" class="mb-8">
         <div class="border-b border-black flex items-center justify-center">
             <div class="flex items-center justify-centers gap-6 rounded shadow-sm p-4 p-4 text-sm font-sans">
-                <div>
-                    Jogado
-                    <select v-model="played" class="h-12 block w-32 mt-1 px-4 py-3 text-base text-gray-900 rounded bg-gray-50 focus:ring-blue-500 focus:border-blue-500">
-                        <option value="-1">-</option>
-                        <option value="0">Não</option>
-                        <option value="1">Sim</option>
-                    </select>
+                <div class="w-[100px]">
+                    <label id="listbox-label" class="block text-sm font-medium leading-6 text-gray-900">Jogado</label>
+                    <selector v-model="played" :options='[{id: -1, text: "-"}, {id: 0, text: "Não"}, {id: 1, text: "Sim"}]'/>
+                </div>
+                <div class="w-[100px]">
+                    <label id="listbox-label" class="block text-sm font-medium leading-6 text-gray-900">Aprendido</label>
+                    <selector v-model="learned" :options='[{id: -1, text: "-"}, {id: 0, text: "Não"}, {id: 1, text: "Sim"}]'/>
+                </div>
+                <div class="w-[200px]">
+                    <label id="listbox-label" class="block text-sm font-medium leading-6 text-gray-900">Jogadores</label>
+                    <selector v-model="maxPlayers" :options='[{id: -1, text: "-"}, {id: 1, text: "1 jogador"}, {id: 2, text: "2 jogadores"}, {id: 3, text: "3 jogadores"}, {id: 4, text: "4 jogadores"}, {id: 5, text: "5 jogadores"}, {id: 6, text: "6 jogadores"}]'/>
+                </div>
+                <div class="w-[150px]">
+                    <label id="listbox-label" class="block text-sm font-medium leading-6 text-gray-900">Avaliação</label>
+                    <selector v-model="rating" :options='[{id: -1, text: "-"}, {id: 1, text: "1 estrela"}, {id: 2, text: "2 estrelas"}, {id: 3, text: "3 estrelas"}]'/>
                 </div>
                 <div>
-                    Aprendido
-                    <select v-model="learned" class="block h-12 w-32 mt-1 px-4 py-3 text-base text-gray-900 rounded bg-gray-50 focus:ring-blue-500 focus:border-blue-500">
-                        <option value="-1">-</option>
-                        <option value="0">Não</option>
-                        <option value="1">Sim</option>
-                    </select>
+                    <label id="listbox-label" class="block text-sm font-medium leading-6 text-gray-900">Filtro</label>
+                    <input v-model="filter" type="text" class="border-0 flex w-full rounded-md bg-white py-1.5 px-4 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6">
                 </div>
-                <div>
-                    Jogadores
-                    <div class="h-12">
-                        <select v-model="maxPlayers" class="w-32 h-12 mt-1 px-4 py-3 text-base text-gray-900 rounded bg-gray-50 focus:ring-blue-500 focus:border-blue-500">
-                            <option value="">-</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                        </select>
-                    </div>
-                </div>
-                <div>
-                    Avaliação
-                    <div class="h-12">
-                        <select v-model="rating" class="w-32 h-12 mt-1 px-4 py-3 text-base text-gray-900 rounded bg-gray-50 focus:ring-blue-500 focus:border-blue-500">
-                            <option value="-1">-</option>
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                        </select>
-                    </div>
-                </div>
-                <div>
-                    Filtro
-                    <div class="flex items-center justify-center h-12 w-72 mt-1 text-base text-gray-900 p-2 rounded bg-gray-50 focus:ring-blue-500 focus:border-blue-500">
-                        <input type="text" v-model="filter" class="border-0 h-full w-full bg-transparent focus:outline-none">
-                    </div>
-                </div>
-                <div>
-                    <label id="listbox-label" class="block text-sm font-medium leading-6 text-gray-900">Assigned to</label>
-                    <selector />
-                  </div>
             </div>
         </div>
-        <div class="my-4 flex gap-12 justify-center flex-wrap">
-            <game-card
-                v-for="game in filteredGames"
-                :min-players="game.minPlayers"
-                :max-players="game.maxPlayers"
-                :complexity="game.complexity"
-                :rate="game.rate"
-                :time="game.time"
-                :learned="game.learned"
-                :played="game.played"
-                :name="game.name"
-                :title="game.title"
-                :key="game.name"
-                :link="game.link"
-            ></game-card>
+        <div class="mx-12 mt-4 mb-12 flex gap-12 justify-center flex-wrap">
+            <transition-group name="list" tag="ul" class="my-4 flex gap-12 justify-center flex-wrap">
+                <game-card
+                    v-for="game in filteredGames"
+                    :key="game.name"
+                    :min-players="game.minPlayers"
+                    :max-players="game.maxPlayers"
+                    :complexity="game.complexity"
+                    :rate="game.rate"
+                    :time="game.time"
+                    :learned="game.learned ? true : false"
+                    :played="game.played"
+                    :name="game.name"
+                    :title="game.title"
+                    :key="game.name"
+                    :link="game.link"
+                    class="list-item"
+                ></game-card>
+            </transition-group>
         </div>
-    </div>
+</div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <script src="/App/app.js" type="module"></script>
 </body>
