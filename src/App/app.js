@@ -16,9 +16,15 @@ Loader.load().then(() => {
                 games: [],
                 rating: -1,
                 filter: '',
+                voted: [false, false, false],
+                votationId: Math.random().toString(36).substring(7)
             };
         },
         computed: {
+          isReadyToSendVotes() {
+            return this.voted.filter(game => game).length == 3
+          },
+
           filteredGames() {
             return this.games.filter(game => {
               let isValid = (
@@ -82,6 +88,43 @@ Loader.load().then(() => {
         },
 
         methods: {
+          vote(newGame) {
+            if (!this.votationId) {
+              return
+            }
+
+            if (this.voted.findIndex(slot => slot.name == newGame.name) != -1) {
+              return
+            }
+
+            const idx = this.voted.findIndex(slot => slot == false)
+
+            if (idx == -1) {
+              return
+            }
+
+            this.voted = this.voted.map((game, gameIdx) => gameIdx == idx ? newGame : game)
+          },
+
+          unvote(game) {
+            const idx = this.voted.findIndex(slot => slot.name == game.name)
+
+            if (!this.voted[idx]) {
+              return
+            }
+
+            this.voted = this.voted.slice(0, idx).concat(this.voted.slice(idx + 1))
+            setTimeout(() => {
+              while (this.voted.length < 3) {
+                this.voted.push(false)
+              }
+            }, 200)
+          },
+
+          sendVotes() {
+            this.votationId = false
+            this.voted = [false, false, false]
+          }
         },
     });
 })
