@@ -26,6 +26,12 @@ export default
                 this.internalSelected = option.id;
                 this.toggleList();
                 this.$emit('input', this.internalSelected);
+            },
+
+            handleClickOutside(event) {
+                if (!this.$el.contains(event.target)) {
+                    this.internalShowList = false;
+                }
             }
         },
         watch: {
@@ -45,6 +51,14 @@ export default
             selectedOption() {
                 return this.options.find(option => option.id === this.internalSelected);
             }
-        }
+        },
+
+        mounted() {
+            document.addEventListener('click', this.handleClickOutside);
+        },
+
+        beforeDestroy() {
+            document.removeEventListener('click', this.handleClickOutside);
+        },
     },
 }
