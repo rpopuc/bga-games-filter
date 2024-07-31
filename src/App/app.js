@@ -8,12 +8,14 @@ Loader.load().then(() => {
         data() {
             return {
                 minPlayers: 2,
-                maxPlayers: 6,
+                maxPlayers: 5,
+                playTime: 0,
+                complexity: -1,
                 learned: 1,
                 played: 1,
                 games: [],
                 rating: -1,
-                filter: ''
+                filter: '',
             };
         },
         computed: {
@@ -26,6 +28,22 @@ Loader.load().then(() => {
                   game.maxPlayers >= this.maxPlayers
                 )
               )
+
+              if (this.playTime > -1) {
+                switch (this.playTime) {
+                  case 1: isValid = isValid && game.time <= 15; break;
+                  case 2: isValid = isValid && game.time > 15 && game.time <= 30; break;
+                  case 3: isValid = isValid && game.time > 30; break;
+                }
+              }
+
+              if (this.complexity > -1) {
+                switch (this.complexity) {
+                  case 1: isValid = isValid && game.complexity <= 2; break;
+                  case 2: isValid = isValid && game.complexity > 2 && game.complexity <= 3; break;
+                  case 3: isValid = isValid && game.complexity > 3; break;
+                }
+              }
 
               if (this.played > -1) {
                 isValid = isValid && (this.played == 0 ? !game.played : game.played)

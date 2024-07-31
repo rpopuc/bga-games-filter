@@ -1,0 +1,7 @@
+services:
+  app:
+    image: nginx:alpine-perl
+    volumes:
+      - ./src/:/usr/share/nginx/html:ro
+    ports:
+      - 3300:80

@@ -1,0 +1,11 @@
+<div>
+    <template v-if="value > -1">
+        <!-- Draw stars 0 to value in yellow -->
+        <icon-star v-for="i in value" :key="`yellow-${i}`" :class="`h-${height}`" class="fill-yellow-300"></icon-star>
+
+        <!-- Draw stars value to 3 in gray -->
+        <icon-star v-for="i in 3 - value" :key="`gray-${i}`" :class="`h-${height}`" class="fill-gray-300"></icon-star>
+    </template>
+
+    <div v-else :class="`h-${height} flex items-center`">-</div>
+</div>
