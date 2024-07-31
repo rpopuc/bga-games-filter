@@ -8,6 +8,7 @@ export class Loader
         'IconStar',
         'IconPlayed',
         'IconLearned',
+        'IconFilter',
         'Rating',
         'RatingSelector',
         'Selector',
