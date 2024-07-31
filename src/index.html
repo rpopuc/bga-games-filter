@@ -25,7 +25,7 @@
                 </div>
                 <div class="w-[150px]">
                     <label id="listbox-label" class="block text-sm font-medium leading-6 text-gray-900">Avaliação</label>
-                    <selector v-model="rating" :options='[{id: -1, text: "-"}, {id: 1, text: "1 estrela"}, {id: 2, text: "2 estrelas"}, {id: 3, text: "3 estrelas"}]'/>
+                    <rating-selector v-model="rating" :options='[{id: -1}, {id: 0}, {id: 1}, {id: 2}, {id: 3}]'/>
                 </div>
                 <div>
                     <label id="listbox-label" class="block text-sm font-medium leading-6 text-gray-900">Filtro</label>

@@ -9,6 +9,7 @@ export class Loader
         'IconPlayed',
         'IconLearned',
         'Rating',
+        'RatingSelector',
         'Selector',
         'GameCard',
     ]
@@ -18,7 +19,7 @@ export class Loader
         return Promise.all(this.files.map(file => {
             return import(`${path}${file}/index.js`).then(module => {
                 const component = module.default
-                return fetch(`${path}${file}/template.html`).then(response => response.text()).then(template => {
+                return fetch(`${path}${file}/${file}.html`).then(response => response.text()).then(template => {
                     Vue.component(file, {
                         template,
                         ...component.definition,
