@@ -1,0 +1,18 @@
+{
+  "name": "checkout-tarde",
+  "version": "1.0.0",
+  "description": "App for choose game for play",
+  "main": "index.js",
+  "private": false,
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "Robson P Oliveira",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.2",
+    "socket.io": "^4.7.5",
+    "uuid": "^10.0.0"
+  }
+}

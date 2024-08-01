@@ -1,0 +1,7 @@
+<li class="relative" @click="click">
+    <div target="_blank" class="relative group block drop-shadow-lg">
+        <div class="relative z-1 rounded-md w-[150px] h-[90px] bg-[#F1EEE5] p-2 outline outline-1 -outline-offset-1 outline-black border-black flex flex-col items-center justify-center bg-cover cursor-pointer group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" :class="getBackground()">
+            <img v-if="!isBlank" :src="`https://x.boardgamearena.net/data/gamemedia/${name}/title/en_500.png?h=1651660181`" class="w-[70%]">
+        </div>
+    </div>
+</li>

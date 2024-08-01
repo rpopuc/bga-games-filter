@@ -1,33 +1,34 @@
-<li class="relative">
-    <a :href="link" target="_blank" class="relative group block hover:drop-shadow-lg">
+<li class="relative" @click="click">
+    <div target="_blank" class="relative group block hover:drop-shadow-lg">
         <div class="z-10 relative top-4 flex justify-center group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform">
-            <rating :value="rate" class="flex"/>
+            <rating :value="isBlank ? 0 : rate" class="flex"/>
         </div>
         <div class="relative z-1 rounded-md w-[270px] h-[162px] bg-[#F1EEE5] relative p-2 outline outline-1 -outline-offset-1 outline-black border-black flex flex-col items-center bg-cover saturate-50 group-hover:filter-none cursor-pointer group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" :class="getBackground()">
-            <icon-played v-if="played" class="absolute z-10 -right-[19px] top-[2px] h-8 rounded"></icon-played>
+            <icon-played v-if="!isBlank && played" class="absolute z-10 -right-[19px] top-[2px] h-8 rounded"></icon-played>
             <div class="flex justify-center items-center h-[148px] bg-cover rounded">
-                <img :src="`https://x.boardgamearena.net/data/gamemedia/${name}/title/en_500.png?h=1651660181`" class="w-48">
+                <img v-if="!isBlank" :src="`https://x.boardgamearena.net/data/gamemedia/${name}/title/en_500.png?h=1651660181`" class="w-48">
+                <div v-else class="w-48 h-48"></div>
             </div>
             <div class="relative bottom-3 flex gap-4 items-center justify-center">
                 <div class="flex flex-col items-center">
                     <div class="border border-black rounded-full p-4 size-4 flex items-center justify-center bg-[#F1EEE5] group-hover:bg-white">
-                        {{maxPlayers}}
+                        <span v-if="!isBlank">{{maxPlayers}}</span>
                     </div>
                     <icon-user class="h-5"></icon-user>
                 </div>
                 <div class="flex flex-col items-center">
                     <div class="border border-black rounded-full p-4 size-4 flex items-center justify-center bg-[#F1EEE5] group-hover:bg-white">
-                        {{time}}
+                        <span v-if="!isBlank">{{time}}</span>
                     </div>
                     <icon-clock class="h-5"></icon-clock>
                 </div>
                 <div class="flex flex-col items-center">
                     <div class="border border-black rounded-full p-4 size-4 flex items-center justify-center bg-[#F1EEE5] group-hover:bg-white">
-                        {{complexity}}
+                        <span v-if="!isBlank">{{complexity}}</span>
                     </div>
                     <icon-complexity class="h-5"></icon-complexity>
                 </div>
             </div>
         </div>
-    </a>
+    </div>
 </li>

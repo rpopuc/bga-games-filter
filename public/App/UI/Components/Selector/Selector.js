@@ -15,10 +15,18 @@ export default
             value: {
                 type: Number,
                 default: 1,
+            },
+            readonly: {
+                type: Boolean,
+                default: false,
             }
         },
         methods: {
             toggleList() {
+                if (this.readonly) {
+                    return;
+                }
+
                 this.internalShowList = !this.internalShowList;
             },
 

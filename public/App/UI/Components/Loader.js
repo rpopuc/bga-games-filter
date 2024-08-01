@@ -12,6 +12,7 @@ export class Loader
         'Rating',
         'RatingSelector',
         'Selector',
+        'GameTag',
         'GameCard',
     ]
 
