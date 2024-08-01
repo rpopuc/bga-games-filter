@@ -17,7 +17,7 @@ io.on('connection', (socket) => {
     socket.join(roomId);
     callback(roomId);
     updateRoomInfo(roomId);
-});
+  });
 
   socket.on('join_room', (roomId, callback) => {
     if (!roomManager.roomExists(roomId)) {

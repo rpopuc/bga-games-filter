@@ -1,15 +1,8 @@
 services:
-  app:
-    image: nginx:alpine-perl
-    volumes:
-      - ./src/:/usr/share/nginx/html:ro
-    ports:
-      - 3300:80
-
   node:
     image: node:alpine
     volumes:
-      - ./backend/:/var/www/
+      - ./:/var/www/
     working_dir: /var/www/
     tty: true
     labels:

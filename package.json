@@ -1,14 +1,15 @@
 {
-  "name": "www",
+  "name": "checkout-tarde",
   "version": "1.0.0",
-  "description": "",
+  "description": "App for choose game for play",
   "main": "index.js",
+  "private": false,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Robson P Oliveira",
+  "license": "MIT",
   "dependencies": {
     "express": "^4.19.2",
     "socket.io": "^4.7.5",
