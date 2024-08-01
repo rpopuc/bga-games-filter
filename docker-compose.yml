@@ -5,3 +5,24 @@ services:
       - ./src/:/usr/share/nginx/html:ro
     ports:
       - 3300:80
+
+  node:
+    image: node:alpine
+    volumes:
+      - ./backend/:/var/www/
+    working_dir: /var/www/
+    tty: true
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.checkout_tarde_app.tls=true"
+      - "traefik.http.routers.checkout_tarde_app.tls.certresolver=cloudflare"
+      - "traefik.http.routers.checkout_tarde_app.entrypoints=websecure"
+      - "traefik.http.routers.checkout_tarde_app.rule=Host(`checkout-tarde.local.rpopuc.com`)"
+      - "traefik.http.services.checkout_tarde_app.loadbalancer.server.port=3000"
+      - "traefik.docker.network=traefik"
+    networks:
+      - traefik
+
+networks:
+  traefik:
+    external: true

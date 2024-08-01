@@ -1,0 +1,16 @@
+[v-cloak] {
+    display: none;
+}
+
+.list-item {
+    transition: all .5s;
+    display: inline-block;
+}
+
+.list-enter, .list-leave-to {
+    opacity: 0;
+    transform: translateY(30px);
+}
+.list-leave-active {
+    position: absolute;
+}
