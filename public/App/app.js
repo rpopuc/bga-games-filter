@@ -27,6 +27,7 @@ Loader.load().then(() => {
                 totalUsers: 0,
                 votesCount: 0,
                 maxVotes: 2,
+                hasVoted: false,
 
                 showResults: false,
                 results: [],
@@ -143,6 +144,7 @@ Loader.load().then(() => {
               this.results = votes;
               this.winnerGame = this.games.find(game => game.name == votes[0][0]);
               this.showResults = true;
+              this.hasVoted = false;
             });
 
             socket.on('room_info', (info) => {
@@ -185,6 +187,10 @@ Loader.load().then(() => {
           },
 
           unvote(game) {
+            if (this.hasVoted) {
+              return
+            }
+
             const idx = this.voted.findIndex(slot => slot.name == game.name)
 
             if (!this.voted[idx]) {
@@ -200,7 +206,12 @@ Loader.load().then(() => {
           },
 
           sendVotes() {
+            if (this.hasVoted) {
+              return
+            }
+
             const count = this.voted.filter(game => game).length
+
             if (count < 3) {
               return
             }
@@ -212,7 +223,8 @@ Loader.load().then(() => {
                 alert('Falha ao enviar o voto');
                 return
               }
-              //this.hasVoted = true;
+
+              this.hasVoted = true;
             });
           }
         },

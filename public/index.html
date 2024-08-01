@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/App/Styles/app.css">
 </head>
 <body class="bg-[#F1EEE5]">
-    <div id="app" v-cloak class="mb-8 relative">
+    <div id="app" v-cloak class="relative">
         <div v-show="showResults" class="fixed h-screen w-screen bg-white/60 flex flex-col items-center justify-center z-50">
             <ul class="bg-white pt-10 pb-24 px-24 rounded-md border-2 border-black shadow-md">
                 <div class="text-center mb-8 font-medium">JOGO ESCOLHIDO</div>
@@ -33,7 +33,7 @@
             </button>
         </div>
 
-        <div>
+        <div class="mb-20" :class="{'mb-56': votingRoomId}">
             <div class="relative flex items-center justify-between bg-[#fafafa]">
                 <img @click="createVotingRoom" class="w-16 mx-4 absolute" :class="{'animate-spin': false}" src='https://doc.boardgamearena.com/images/thumb/e/e4/Logo_without_title.png/800px-Logo_without_title.png'>
                 <div class="flex flex-1 items-center justify-center gap-6 rounded shadow-sm p-4 p-4 text-sm font-sans">
@@ -105,37 +105,6 @@
                 </div>
 
                 <div class="flex gap-4">
-                    <div v-cloak class="px-6 rounded" :class="{ 'hidden': !votingRoomId }">
-                        <div class="relative bg-white px-6 pt-4 rounded w-[320px]">
-                            <div class="flex items-center justify-center font-medium">
-                                Votação {{ votesCount }}/{{ maxVotes }}
-                            </div>
-                            <transition-group name="list" tag="ul" class="flex flex-col gap-10  pb-12">
-                                <game-card
-                                    v-for="(game, id) in voted"
-                                    :key="`game-${id}`"
-                                    :min-players="game.minPlayers"
-                                    :max-players="game.maxPlayers"
-                                    :complexity="game.complexity"
-                                    :rate="game.rate"
-                                    :time="game.time"
-                                    :learned="game.learned ? true : false"
-                                    :played="game.played"
-                                    :name="game.name"
-                                    :title="game.title"
-                                    :key="game.name"
-                                    :link="game.link"
-                                    class="list-item"
-                                    :is-blank="game === false"
-                                    @click="unvote(game)"
-                                ></game-card>
-                            </transition-group>
-                        </div>
-                        <button @click="sendVotes" :disabled="!isReadyToSendVotes" class="mt-2 w-full p-2 text-white font-medium rounded bg-gradient-to-r from-[#AF22F1] to-[#0FAABA] saturate-100 transition-all duration-1000 disabled:saturate-0">
-                            Votar
-                        </button>
-                    </div>
-
                     <transition-group name="list" tag="ul" class="flex-1 flex gap-12 justify-center flex-wrap">
                         <game-card
                             v-for="game in filteredGames"
@@ -158,6 +127,39 @@
                 </div>
             </div>
         </div>
+
+        <ul v-cloak :class="{ 'hidden': !votingRoomId }" class="h-24 w-full fixed bottom-0 z-20 bg-[#fafafa]">
+            <div class="h-1 w-full bg-gradient-to-r from-[#AF22F1] to-[#0FAABA] top-0">
+            </div>
+
+            <div class="flex justify-between relative">
+                <div class="flex items-center justify-start font-medium bottom-5 relative p-4 w-[33%]">
+                    Votação {{ votesCount }}/{{ maxVotes }}
+                </div>
+                <div class="flex-1 flex justify-center gap-4 relative -top-[20px]">
+                    <transition-group name="list" tag="ul" class="flex gap-10  pb-12">
+                        <game-tag
+                            v-for="(game, id) in voted"
+                            :key="`game-${id}`"
+                            :name="game.name"
+                            :title="game.title"
+                            class="list-item"
+                            :is-blank="game === false"
+                            @click="unvote(game)"
+                        ></game-tag>
+                    </transition-group>
+                </div>
+                <div class="flex items-center bottom-5 p-12 relative w-[33%] justify-end">
+                    <button v-if="!hasVoted" @click="sendVotes" :disabled="!isReadyToSendVotes" class="p-2 px-8 text-white font-medium rounded bg-gradient-to-r from-[#AF22F1] to-[#0FAABA] saturate-100 transition-all duration-1000 disabled:saturate-0">
+                        Enviar escolhas
+                    </button>
+
+                    <div v-if="hasVoted" class="p-2 px-8 text-black font-medium rounded">
+                        Escolhas enviadas. Aguarde a apuração...
+                    </div>
+                </div>
+            </div>
+        </ul>
     </div>
     <script src="https://cdn.socket.io/4.4.1/socket.io.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
