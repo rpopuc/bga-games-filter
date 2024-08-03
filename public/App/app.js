@@ -12,7 +12,7 @@ Loader.load().then(() => {
         data() {
             return {
                 minPlayers: 2,
-                maxPlayers: 5,
+                maxPlayers: 2,
                 playTime: 0,
                 complexity: -1,
                 learned: 1,
@@ -30,7 +30,7 @@ Loader.load().then(() => {
                 hasVoted: false,
 
                 showResults: false,
-                results: [],
+                votingResults: [],
                 winnerGame: null,
             };
         },
@@ -95,6 +95,16 @@ Loader.load().then(() => {
               .then(response => response.json())
               .then(games => {
                 this.games = games
+
+                // this.votingResults = [
+                //   {name: games[0].name, votes: 3, points: 9},
+                //   {name: games[1].name, votes: 3, points: 8},
+                //   {name: games[2].name, votes: 3, points: 6},
+                //   {name: games[3].name, votes: 2, points: 3},
+                //   {name: games[4].name, votes: 1, points: 1},
+                // ]
+                // this.winnerGame = this.votingResults.shift()
+                // this.showResults = true
               })
 
             this.hookVotingRoom()
@@ -141,9 +151,9 @@ Loader.load().then(() => {
               this.voted = [false, false, false];
               this.votingRoomId = null;
               window.history.pushState({}, '', '/');
-              this.results = votes;
-              this.winnerGame = this.games.find(game => game.name == votes[0][0]);
-              this.showResults = true;
+              this.votingResults = votes;
+              this.winnerGame = this.votingResults.shift()
+              this.showResults = true
               this.hasVoted = false;
             });
 

@@ -45,6 +45,10 @@ export default
             isBlank: {
                 type: Boolean,
                 default: false
+            },
+            useLink: {
+                type: Boolean,
+                default: true
             }
         },
         methods: {
@@ -53,6 +57,11 @@ export default
             },
 
             click() {
+                if (this.useLink) {
+                    window.open(this.link, '_blank');
+                    return
+                }
+
                 this.$emit('click')
             },
 
