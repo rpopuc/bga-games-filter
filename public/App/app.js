@@ -160,6 +160,10 @@ Loader.load().then(() => {
               return
             }
 
+            if (this.maxPlayers < 2) {
+              return
+            }
+
             console.log('Trying to create room')
             socket.emit('create_room', this.maxPlayers, (roomId) => {
               console.log('Created room', roomId)
