@@ -12,7 +12,7 @@ Loader.load().then(() => {
         data() {
             return {
                 minPlayers: 2,
-                maxPlayers: 2,
+                maxPlayers: 0,
                 playTime: 0,
                 complexity: -1,
                 learned: 1,
@@ -95,16 +95,6 @@ Loader.load().then(() => {
               .then(response => response.json())
               .then(games => {
                 this.games = games
-
-                // this.votingResults = [
-                //   {name: games[0].name, votes: 3, points: 9},
-                //   {name: games[1].name, votes: 3, points: 8},
-                //   {name: games[2].name, votes: 3, points: 6},
-                //   {name: games[3].name, votes: 2, points: 3},
-                //   {name: games[4].name, votes: 1, points: 1},
-                // ]
-                // this.winnerGame = this.votingResults.shift()
-                // this.showResults = true
               })
 
             this.hookVotingRoom()

@@ -6,6 +6,10 @@ export default
                 type: String,
                 default: '',
             },
+            useLink: {
+                type: Boolean,
+                default: false
+            },
             isBlank: {
                 type: Boolean,
                 default: false
@@ -17,6 +21,11 @@ export default
             },
 
             click() {
+                if (this.useLink) {
+                    window.open(`https://boardgamearena.com/gamepanel?game=${this.name}`, '_blank');
+                    return
+                }
+
                 this.$emit('click')
             },
 

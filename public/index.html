@@ -16,6 +16,7 @@
                     <game-tag
                         v-if="winnerGame"
                         :name="winnerGame.name"
+                        :use-link="true"
                         class="w-[250px] h-[150px]"
                     ></game-tag>
                     <div class="w-full flex justify-between text-sm font-medium">
@@ -114,17 +115,7 @@
                         <game-card
                             v-for="game in filteredGames"
                             :key="game.name"
-                            :min-players="game.minPlayers"
-                            :max-players="game.maxPlayers"
-                            :complexity="game.complexity"
-                            :rate="game.rate"
-                            :time="game.time"
-                            :learned="game.learned ? true : false"
-                            :played="game.played"
-                            :name="game.name"
-                            :title="game.title"
-                            :key="game.name"
-                            :link="game.link"
+                            :game="game"
                             :use-link="!votingRoomId"
                             class="list-item"
                             @click="vote(game)"
