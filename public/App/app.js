@@ -16,7 +16,7 @@ Loader.load().then(() => {
                 playTime: 0,
                 complexity: -1,
                 learned: 1,
-                played: 1,
+                played: -1,
                 games: [],
                 rating: -1,
                 filter: '',
