@@ -12,7 +12,7 @@ Loader.load().then(() => {
         data() {
             return {
                 minPlayers: 2,
-                maxPlayers: 3,
+                maxPlayers: 0,
                 playTime: 0,
                 complexity: -1,
                 learned: 1,
