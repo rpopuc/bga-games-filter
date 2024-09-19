@@ -34,6 +34,24 @@ io.on("connection", (socket) => {
     }, 100);
   });
 
+  socket.on("select", (roomId, vote) => {
+    if (!roomManager.roomExists(roomId)) {
+      callback(false);
+    }
+    roomManager.select(roomId, socket.id, vote);
+    io.in(roomId).emit("select", vote);
+    updateRoomInfo(roomId);
+  })
+
+  socket.on("unselect", (roomId, vote) => {
+    if (!roomManager.roomExists(roomId)) {
+      callback(false);
+    }
+    roomManager.unselect(roomId, socket.id, vote);
+    io.in(roomId).emit("unselect", vote);
+    updateRoomInfo(roomId);
+  })
+
   socket.on("send_vote", (roomId, vote, callback) => {
     if (!roomManager.roomExists(roomId)) {
       callback(false);
@@ -72,10 +90,19 @@ io.on("connection", (socket) => {
 
     const room = roomManager.getRoom(roomId);
 
+    let selectedGames = Array.from(
+      new Set(room.selectedGames.map((selection) => selection.vote))
+    ).slice(0, 15).sort()
+
+    if (selectedGames.length < 4) {
+      selectedGames = []
+    }
+
     const info = {
       totalUsers: room.users.length,
       votesCount: room.votes.length,
       maxVotes: room.maxVotes,
+      selectedGames
     };
     console.log("Updating room info", roomId, info);
     io.in(roomId).emit("room_info", info);

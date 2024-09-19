@@ -12,7 +12,7 @@ Loader.load().then(() => {
         data() {
             return {
                 minPlayers: 2,
-                maxPlayers: 0,
+                maxPlayers: 3,
                 playTime: 0,
                 complexity: -1,
                 learned: 1,
@@ -32,6 +32,8 @@ Loader.load().then(() => {
                 showResults: false,
                 votingResults: [],
                 winnerGame: null,
+
+                selectedGames: [],
             };
         },
         computed: {
@@ -152,6 +154,7 @@ Loader.load().then(() => {
               this.votesCount = info.votesCount;
               this.maxVotes = info.maxVotes;
               this.maxPlayers = info.maxVotes
+              this.selectedGames = info.selectedGames;
             });
           },
 
@@ -188,6 +191,12 @@ Loader.load().then(() => {
             }
 
             this.voted = this.voted.map((game, gameIdx) => gameIdx == idx ? newGame : game)
+            socket.emit('select', this.votingRoomId, newGame.name, (success) => {
+              if (!success) {
+                alert('Falha ao enviar o voto');
+                return
+              }
+            });
           },
 
           unvote(game) {
@@ -202,6 +211,12 @@ Loader.load().then(() => {
             }
 
             this.voted = this.voted.slice(0, idx).concat(this.voted.slice(idx + 1))
+            socket.emit('unselect', this.votingRoomId, game.name, (success) => {
+              if (!success) {
+                alert('Falha ao enviar o voto');
+                return
+              }
+            });
             setTimeout(() => {
               while (this.voted.length < 3) {
                 this.voted.push(false)
